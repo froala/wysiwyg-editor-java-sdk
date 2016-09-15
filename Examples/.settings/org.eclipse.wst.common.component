@@ -3,6 +3,24 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/bower_components" source-path="/bower_components"/>
+        <dependent-module archiveName="Lib.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Lib/Lib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-lang-2.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-io-2.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-io-2.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang-2.6-javadoc.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-lang-2.6-javadoc.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang-2.6-sources.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-lang-2.6-sources.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-io-2.5-javadoc.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-io-2.5-javadoc.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/Examples/build/classes"/>
         <property name="context-root" value="/"/>
     </wb-module>
