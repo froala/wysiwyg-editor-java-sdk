@@ -1,10 +1,15 @@
 package com.froala.editor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import com.froala.editor.image.ImageOptions;
+import com.froala.editor.image.ImageValidation;
 
 /**
  *
@@ -74,4 +79,72 @@ public final class Image {
 	public static void delete(HttpServletRequest req, String src) {
 		File.delete(req, src);
 	}
+
+	/**
+	 * List images from disk.
+	 *
+	 * @param req
+	 *            Used to get the servlet context.
+	 * @param folderPath
+	 *            Server folder path.
+	 * @return Array of image objects.
+	 * @throws Exception
+	 */
+	public static ArrayList<Object> list(HttpServletRequest req, String folderPath) throws Exception {
+		return list(req, folderPath, folderPath);
+	}
+
+	/**
+	 * List images from disk.
+	 *
+	 * @param req
+	 *            Used to get the servlet context.
+	 * @param folderPath
+	 *            Server folder path.
+	 * @param thumbPath
+	 *            Optional. Server thumb path.
+	 * @return Array of image objects.
+	 * @throws Exception
+	 */
+	public static ArrayList<Object> list(HttpServletRequest req, String folderPath, String thumbPath) throws Exception {
+
+		// Use thumbPath as folderPath.
+		if (thumbPath == null) {
+			thumbPath = folderPath;
+		}
+
+		// Array of image objects to return.
+		ArrayList<Object> response = new ArrayList<Object>();
+
+		String absolutePath = File.getAbsoluteServerPath(req, folderPath);
+
+		String[] imageMimetypes = ImageValidation.allowedImageMimeTypesDefault;
+
+		java.io.File folder = new java.io.File(absolutePath);
+
+		// Add images.
+		for (java.io.File fileEntry : folder.listFiles()) {
+			if (fileEntry.isFile()) {
+
+				String filename = fileEntry.getName();
+
+				String mimeType = req.getServletContext().getMimeType(folderPath + filename);
+				if (mimeType == null) {
+					continue;
+				}
+
+				if (ArrayUtils.contains(imageMimetypes, mimeType)) {
+
+					Map<Object, Object> imageObj = new HashMap<Object, Object>();
+					imageObj.put("url", folderPath + filename);
+					imageObj.put("thumb", thumbPath + filename);
+					imageObj.put("name", filename);
+					response.add(imageObj);
+				}
+			}
+		}
+
+		return response;
+	}
+
 }
