@@ -21,6 +21,9 @@
         <dependent-module archiveName="commons-io-2.5-javadoc.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-io-2.5-javadoc.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="thumbnailator-0.4.8.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/thumbnailator-0.4.8.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/Examples/build/classes"/>
         <property name="context-root" value="/"/>
     </wb-module>

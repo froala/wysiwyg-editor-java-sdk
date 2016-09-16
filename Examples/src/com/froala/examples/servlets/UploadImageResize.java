@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.froala.editor.File;
-import com.froala.editor.file.FileOptions;
+import com.froala.editor.Image;
+import com.froala.editor.image.ImageOptions;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class UploadFile
+ * Servlet implementation class UploadImageResize
  */
-@WebServlet("/upload_file")
+@WebServlet("/upload_image_resize")
 @MultipartConfig
-public class UploadFile extends HttpServlet {
+public class UploadImageResize extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UploadFile() {
+	public UploadImageResize() {
 		super();
 	}
 
@@ -40,13 +40,13 @@ public class UploadFile extends HttpServlet {
 
 		String fileRoute = "/public/";
 
-		// No validation.
-		FileOptions options = new FileOptions();
-		options.setValidation(null);
+		// Use default validation with image resize;
+		ImageOptions options = new ImageOptions();
+		options.setResize(300, 300, false);
 
 		Map<Object, Object> responseData;
 		try {
-			responseData = File.upload(request, fileRoute, options);
+			responseData = Image.upload(request, fileRoute, options);
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseData = new HashMap<Object, Object>();
@@ -57,4 +57,5 @@ public class UploadFile extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(jsonResponseData);
 	}
+
 }
