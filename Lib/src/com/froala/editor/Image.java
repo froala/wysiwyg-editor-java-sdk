@@ -35,7 +35,7 @@ public final class Image {
 	 *
 	 * @param req
 	 *            Servlet HTTP request.
-	 * @param file
+	 * @param fileRoute
 	 *            Route Server route where the file will be uploaded. This route
 	 *            must be public to be accesed by the editor.
 	 * @return Object with link.
@@ -65,7 +65,7 @@ public final class Image {
 	 *            <li>Mime Types: "image/gif", "image/jpeg", "image/pjpeg",
 	 *            "image/x-png", "image/png", "image/svg+xml"</li>
 	 *            </ul>
-	 * 
+	 *
 	 * @return Object with link.
 	 * @throws Exception
 	 */

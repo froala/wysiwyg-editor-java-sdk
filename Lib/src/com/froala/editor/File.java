@@ -45,7 +45,7 @@ public final class File {
 	 *
 	 * @param req
 	 *            Servlet HTTP request.
-	 * @param file
+	 * @param fileRoute
 	 *            Route Server route where the file will be uploaded. This route
 	 *            must be public to be accesed by the editor.
 	 * @return Object with link.
@@ -68,9 +68,12 @@ public final class File {
 	 *            File options. Defaults to {@link #defaultOptions} which has
 	 *            </br>
 	 *            Fieldname: "file" </br>
-	 *            Extensions: "txt", "pdf", "doc" </br>
-	 *            Mime Types: "text/plain", "application/msword",
-	 *            "application/x-pdf", "application/pdf"
+	 *            Validation:
+	 *            <ul>
+	 *            <li>Extensions: "txt", "pdf", "doc"</li>
+	 *            <li>Mime Types: "text/plain", "application/msword",
+	 *            "application/x-pdf", "application/pdf"</li>
+	 *            </ul>
 	 * @return Object with link.
 	 * @throws Exception
 	 */
