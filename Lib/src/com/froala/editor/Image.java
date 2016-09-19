@@ -12,8 +12,9 @@ import com.froala.editor.image.ImageOptions;
 import com.froala.editor.image.ImageValidation;
 
 /**
+ * Image functionality.
  *
- * @author florin@froala.com Image functionality.
+ * @author florin@froala.com
  */
 public final class Image {
 
@@ -54,7 +55,17 @@ public final class Image {
 	 *            Server route where the file will be uploaded. This route must
 	 *            be public to be accesed by the editor.
 	 * @param options
-	 *            Image options.
+	 *            Image options. Defaults to {@link #defaultOptions} which has
+	 *            </br>
+	 *            Fieldname: "file" </br>
+	 *            Validation:
+	 *            <ul>
+	 *            <li>Extensions: "gif", "jpeg", "jpg", "png", "svg",
+	 *            "blob"</li>
+	 *            <li>Mime Types: "image/gif", "image/jpeg", "image/pjpeg",
+	 *            "image/x-png", "image/png", "image/svg+xml"</li>
+	 *            </ul>
+	 * 
 	 * @return Object with link.
 	 * @throws Exception
 	 */

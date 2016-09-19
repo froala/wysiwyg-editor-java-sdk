@@ -3,8 +3,9 @@ package com.froala.editor.image;
 import com.froala.editor.file.FileOptions;
 
 /**
- *
- * @author florin@froala.com Image Options used for uploading.
+ * Image Options used for uploading.
+ * 
+ * @author florin@froala.com
  */
 public class ImageOptions extends FileOptions {
 

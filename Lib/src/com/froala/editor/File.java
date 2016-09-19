@@ -17,8 +17,9 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.Thumbnails.Builder;
 
 /**
+ * File functionality.
  *
- * @author florin@froala.com File functionality.
+ * @author florin@froala.com
  */
 public final class File {
 
@@ -64,7 +65,12 @@ public final class File {
 	 *            Server route where the file will be uploaded. This route must
 	 *            be public to be accesed by the editor.
 	 * @param options
-	 *            File options.
+	 *            File options. Defaults to {@link #defaultOptions} which has
+	 *            </br>
+	 *            Fieldname: "file" </br>
+	 *            Extensions: "txt", "pdf", "doc" </br>
+	 *            Mime Types: "text/plain", "application/msword",
+	 *            "application/x-pdf", "application/pdf"
 	 * @return Object with link.
 	 * @throws Exception
 	 */
@@ -88,9 +94,10 @@ public final class File {
 
 		// Generate random name.
 		String extension = FilenameUtils.getExtension(Utils.getFileName(filePart));
-		String name = Utils.generateUniqueString() + "." + extension;
+		extension = (extension != null && extension != "") ? "." + extension : extension;
+		String name = Utils.generateUniqueString() + extension;
 
-		final String linkName = fileRoute + name;
+		String linkName = fileRoute + name;
 
 		InputStream fileContent = filePart.getInputStream();
 		String absoluteServerPath = getAbsoluteServerPath(req, linkName);

@@ -6,10 +6,9 @@ import org.apache.commons.lang.ArrayUtils;
 import com.froala.editor.CustomValidation;
 
 /**
+ * File validation.
  *
  * @author florin@froala.com
- *
- *         File validation.
  */
 public class FileValidation {
 
@@ -60,7 +59,7 @@ public class FileValidation {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param allowedExts
 	 *            Allowed validation file extensions.
 	 * @param allowedMimeTypes
@@ -81,7 +80,7 @@ public class FileValidation {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param customValidation
 	 *            Custom validation.
 	 */
@@ -94,7 +93,7 @@ public class FileValidation {
 	/**
 	 * Check if file is valid. Use only the custom function if provided. Else
 	 * check if the file has an allowed extension and mimetype.
-	 * 
+	 *
 	 * @param filePath
 	 *            File path.
 	 * @param mimeType

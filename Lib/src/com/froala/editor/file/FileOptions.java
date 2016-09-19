@@ -1,10 +1,9 @@
 package com.froala.editor.file;
 
 /**
+ * File Options used for uploading.
  *
  * @author florin@froala.com
- *
- *         File Options used for uploading.
  */
 public class FileOptions {
 

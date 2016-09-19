@@ -15,7 +15,6 @@ import com.google.gson.Gson;
  * Amazon S3 functionality.
  *
  * @author florin@froala.com
- *
  */
 public final class S3 {
 

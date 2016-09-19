@@ -11,10 +11,10 @@ import javax.servlet.http.Part;
 import org.apache.commons.codec.binary.Hex;
 
 /**
- *
+ * Basic utils.
+ * 
  * @author florin@froala.com
  *
- *         Basic utils.
  */
 public final class Utils {
 

@@ -4,8 +4,9 @@ import com.froala.editor.CustomValidation;
 import com.froala.editor.file.FileValidation;
 
 /**
- *
- * @author florin@froala.com Image Validation.
+ * Image Validation.
+ * 
+ * @author florin@froala.com
  */
 public class ImageValidation extends FileValidation {
 
@@ -42,7 +43,7 @@ public class ImageValidation extends FileValidation {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param allowedExts
 	 *            Allowed validation image extensions.
 	 * @param allowedMimeTypes
@@ -54,7 +55,7 @@ public class ImageValidation extends FileValidation {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param customValidation
 	 *            Custom validation.
 	 */
