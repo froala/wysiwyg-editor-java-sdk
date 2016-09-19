@@ -4,7 +4,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.Part;
+
+import org.apache.commons.codec.binary.Hex;
 
 /**
  *
@@ -46,5 +50,17 @@ public final class Utils {
 			}
 		}
 		return null;
+	}
+
+	public static byte[] hmac(byte[] key, String data) throws Exception {
+		Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
+		SecretKeySpec secret_key = new SecretKeySpec(key, "HmacSHA256");
+		sha256_HMAC.init(secret_key);
+
+		return sha256_HMAC.doFinal(data.getBytes("UTF-8"));
+	}
+
+	public static String hmac_hex(byte[] key, String data) throws Exception {
+		return new String(Hex.encodeHex(hmac(key, data)));
 	}
 }

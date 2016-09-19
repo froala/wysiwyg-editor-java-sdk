@@ -24,6 +24,9 @@
         <dependent-module archiveName="thumbnailator-0.4.8.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/thumbnailator-0.4.8.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="commons-codec-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Lib/lib/commons-codec-1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/Examples/build/classes"/>
         <property name="context-root" value="/"/>
     </wb-module>
