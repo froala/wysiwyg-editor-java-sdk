@@ -18,7 +18,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/classes"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lib"/>
 	<classpathentry kind="lib" path="lib/gson-2.7-javadoc.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -29,5 +28,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Lib/wysiwyg-editor-java-sdk.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

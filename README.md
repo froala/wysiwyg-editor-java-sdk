@@ -10,16 +10,20 @@ JRE version >= 1.5 is required.
 
 1. Clone this repo or download the zip.
 
-2. Load `lib` project directory in your project and import it.
+2. Import `Lib/wysiwyg-editor-java-sdk.jar` or load `Lib` project directory in your project and import it.
 
 3. To run examples:
 
- * Open `examples` and `lib` projects in your IDE.
- * Run `examples` on a server like Tomcat. It will be available on `http://localhost:3005/`
+ * Open `Examples` and `Lib` projects in your IDE.
+ * Run `Examples` on a server like Tomcat. It will be available on `http://localhost:3005/`
 
 ## Import lib
 
- * Eclipse -> Right click on your project -> Build Path -> Configure Build Path... -> Projects -> Add -> Select `lib` project.
+ * Eclipse -> Right click on your project -> Build Path -> Configure Build Path... -> Libraries -> Add JARs -> Select `Lib/wysiwyg-editor-java-sdk.jar`.
+
+## Import project
+
+ * Eclipse -> Right click on your project -> Build Path -> Configure Build Path... -> Projects -> Add -> Select `Lib` project.
 
 ## Documentation
 
