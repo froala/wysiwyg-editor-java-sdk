@@ -1,13 +1,14 @@
 package com.froala.editor;
 
+
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import com.froala.editor.file.FileOptions;
@@ -79,7 +80,9 @@ public final class File {
 	 */
 	public static Map<Object, Object> upload(HttpServletRequest req, String fileRoute, FileOptions options)
 			throws Exception {
-
+		
+		String name = null;
+	    
 		if (options == null) {
 			options = defaultOptions;
 		}
@@ -98,14 +101,14 @@ public final class File {
 		// Generate random name.
 		String extension = FilenameUtils.getExtension(Utils.getFileName(filePart));
 		extension = (extension != null && extension != "") ? "." + extension : extension;
-		String name = Utils.generateUniqueString() + extension;
-
-		String linkName = fileRoute + name;
+		name = UUID.randomUUID().toString() + extension ;
+		
+		String linkName = "files/" + name;
 
 		InputStream fileContent = filePart.getInputStream();
 		String absoluteServerPath = getAbsoluteServerPath(req, linkName);
 
-		java.io.File targetFile = new java.io.File(absoluteServerPath);
+		
 
 		// Resize image.
 		if (options instanceof ImageOptions && ((ImageOptions) options).getResizeOptions() != null) {
@@ -123,10 +126,22 @@ public final class File {
 				thumbnailsBuilder = thumbnailsBuilder.forceSize(newWidth, newHeight);
 			}
 
-			thumbnailsBuilder.toFile(targetFile);
+			thumbnailsBuilder.toFile(fileRoute + name);
 		} else {
-			FileUtils.copyInputStreamToFile(fileContent, targetFile);
-		}
+			
+			// Save the file on server.
+			 java.io.File file = new java.io.File(fileRoute, name);
+
+	            try (InputStream input = filePart.getInputStream()) {
+	                Files.copy(input, file.toPath());
+	            }
+
+	            catch (Exception e) {
+	            	
+	            	System.out.println("<br/> ERROR: " + e);
+	            }
+
+			}
 
 		if (options.getValidation() != null
 				&& !options.getValidation().check(absoluteServerPath, filePart.getContentType())) {
@@ -137,6 +152,7 @@ public final class File {
 
 		Map<Object, Object> linkObject = new HashMap<Object, Object>();
 		linkObject.put("link", linkName);
+		
 		return linkObject;
 	}
 
@@ -170,4 +186,14 @@ public final class File {
 			file.delete();
 		}
 	}
+	public static String getFileName(final Part part) {
+	    for (String content : part.getHeader("content-disposition").split(";")) {
+	        if (content.trim().startsWith("filename")) {
+	            return content.substring(
+	                    content.indexOf('=') + 1).trim().replace("\"", "");
+	        }
+	    }
+	    return null;
+	}
+	
 }

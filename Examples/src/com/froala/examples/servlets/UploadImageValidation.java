@@ -42,7 +42,7 @@ public class UploadImageValidation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String fileRoute = "/public/";
+		String fileRoute = "/PATH TO/YOUR PROJECT/WORKSPACE/WEBCONTENT/WEB-INF/SOME FOLDER/";
 
 		ImageOptions options = new ImageOptions();
 		options.setFieldname("myImage");

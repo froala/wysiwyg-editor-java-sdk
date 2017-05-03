@@ -1,6 +1,7 @@
 package com.froala.examples.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,23 +37,39 @@ public class UploadImage extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String fileRoute = "/PATH TO/YOUR PROJECT/WORKSPACE/WEBCONTENT/WEB-INF/SOME FOLDER/";
+		final PrintWriter writer = response.getWriter();
 
-		String fileRoute = "/public/";
-
-		Map<Object, Object> responseData;
+		Map<Object, Object> responseData = null;
 		try {
-			responseData = Image.upload(request, fileRoute); // Use default
+			
+			responseData = Image.upload(request, fileRoute); 	// Use default
 																// image
 																// validation.
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 			responseData = new HashMap<Object, Object>();
 			responseData.put("error", e.toString());
+			
+		} finally {
+			
+			String jsonResponseData = new Gson().toJson(responseData);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(jsonResponseData);
+			
+//			System.out.println("the response data:"+ responseData);
+			if (writer != null) {
+				System.out.println("writer is diff from null");
+                writer.close();
+            }
+			//response.getWriter().close();
+			
 		}
-		String jsonResponseData = new Gson().toJson(responseData);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(jsonResponseData);
+		
 	}
 
 }

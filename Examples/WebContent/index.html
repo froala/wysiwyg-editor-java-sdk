@@ -120,7 +120,23 @@
         .fail (function (err) {
           console.log ('file delete problem: ' + JSON.stringify(err));
         })
-      })
+      }),
+    $('#edit').on('froalaEditor.image.uploaded', function (e, editor, resp) {
+    	console.log (resp)
+    	var json = JSON.parse(resp);
+    	console.log (json.link);
+    	var img = new Image();
+    	img.onerror = function () {
+    		console.log ('error');
+    	}
+    	img.src = json.link;
+    })
+    $('#edit').on('froalaEditor.image.error', function (e, editor, error,response) {
+    console.log('this is e:', e);
+    console.log('this is editor:', editor);
+    console.log('this is error:', error);
+    console.log('this is error:', response);
+	});
     });
   </script>
 
