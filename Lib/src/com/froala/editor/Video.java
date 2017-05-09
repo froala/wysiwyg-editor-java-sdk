@@ -8,20 +8,13 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+
 import org.apache.commons.io.FilenameUtils;
 
-import com.froala.editor.file.FileOptions;
-import com.froala.editor.image.ImageOptions;
+import com.froala.editor.video.VideoOptions;
 
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.Thumbnails.Builder;
 
-/**
- * File functionality.
- *
- * @author florin@froala.com
- */
-public final class File {
+public class Video {
 
 	/**
 	 * Content type string used in http multipart.
@@ -31,43 +24,43 @@ public final class File {
 	/**
 	 * Private constructor.
 	 */
-	private File() {
+	private Video() {
 
 	}
 
 	/**
-	 * File default options.
+	 * Video default options.
 	 */
-	public static final FileOptions defaultOptions = new FileOptions();
+	public static final VideoOptions defaultOptions = new VideoOptions();
 
 	/**
-	 * Uploads a file to disk.
+	 * Uploads a Video to disk.
 	 *
 	 * @param req
 	 *            Servlet HTTP request.
-	 * @param fileRoute
-	 *            Route Server route where the file will be uploaded. This route
+	 * @param VideoRoute
+	 *            Route Server route where the Video will be uploaded. This route
 	 *            must be public to be accesed by the editor.
 	 * @return Object with link.
 	 * @throws Exception
 	 */
-	public static Map<Object, Object> upload(HttpServletRequest req, String fileRoute) throws Exception {
+	public static Map<Object, Object> upload(HttpServletRequest req, String VideoRoute) throws Exception {
 
-		return upload(req, fileRoute, defaultOptions);
+		return upload(req, VideoRoute, defaultOptions);
 	}
 
 	/**
-	 * Uploads a file to disk.
+	 * Uploads a Video to disk.
 	 *
 	 * @param req
 	 *            Servlet HTTP request.
-	 * @param fileRoute
-	 *            Server route where the file will be uploaded. This route must
+	 * @param VideoRoute
+	 *            Server route where the Video will be uploaded. This route must
 	 *            be public to be accesed by the editor.
 	 * @param options
-	 *            File options. Defaults to {@link #defaultOptions} which has
+	 *            Video options. Defaults to {@link #defaultOptions} which has
 	 *            </br>
-	 *            Fieldname: "file" </br>
+	 *            Fieldname: "Video" </br>
 	 *            Validation:
 	 *            <ul>
 	 *            <li>Extensions: "txt", "pdf", "doc"</li>
@@ -77,7 +70,7 @@ public final class File {
 	 * @return Object with link.
 	 * @throws Exception
 	 */
-	public static Map<Object, Object> upload(HttpServletRequest req, String fileRoute, FileOptions options)
+	public static Map<Object, Object> upload(HttpServletRequest req, String fileRoute, VideoOptions options)
 			throws Exception {
 		
 		String name = null;
@@ -90,9 +83,9 @@ public final class File {
 
 			throw new Exception("Invalid contentType. It must be " + multipartContentType);
 		}
-		
+
 		Part filePart = req.getPart(options.getFieldname());
-		
+
 		if (filePart == null) {
 			throw new Exception("Fieldname is not correct. It must be: " + options.getFieldname());
 		}
@@ -104,43 +97,19 @@ public final class File {
 		
 		String linkName = "files/" + name;
 
-		InputStream fileContent = filePart.getInputStream();
 		String absoluteServerPath = getAbsoluteServerPath(req, linkName);
 
-		
+		// Save the file on server.
+		 java.io.File file = new java.io.File(fileRoute, name);
+	
+        try (InputStream input = filePart.getInputStream()) {
+            Files.copy(input, file.toPath());
+        }
 
-		// Resize image.
-		if (options instanceof ImageOptions && ((ImageOptions) options).getResizeOptions() != null) {
-
-			ImageOptions.ResizeOptions imageOptions = ((ImageOptions) options).getResizeOptions();
-
-			Builder<? extends InputStream> thumbnailsBuilder = Thumbnails.of(fileContent);
-
-			// Check aspect ratio.
-			int newWidth = imageOptions.getNewWidth();
-			int newHeight = imageOptions.getNewHeight();
-			if (imageOptions.getKeepAspectRatio()) {
-				thumbnailsBuilder = thumbnailsBuilder.size(newWidth, newHeight);
-			} else {
-				thumbnailsBuilder = thumbnailsBuilder.forceSize(newWidth, newHeight);
-			}
-
-			thumbnailsBuilder.toFile(fileRoute + name);
-		} else {
-			
-			// Save the file on server.
-			 java.io.File file = new java.io.File(fileRoute, name);
-
-	            try (InputStream input = filePart.getInputStream()) {
-	                Files.copy(input, file.toPath());
-	            }
-
-	            catch (Exception e) {
-	            	
-	            	System.out.println("<br/> ERROR: " + e);
-	            }
-
-			}
+        catch (Exception e) {
+        	
+        	System.out.println("<br/> ERROR: " + e);
+        }
 
 		if (options.getValidation() != null
 				&& !options.getValidation().check(absoluteServerPath, filePart.getContentType())) {
@@ -194,5 +163,6 @@ public final class File {
 	    }
 	    return null;
 	}
+	
 	
 }

@@ -12,28 +12,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.froala.editor.Image;
+import com.froala.editor.Video;
 import com.google.gson.Gson;
 
 /**
  * Servlet implementation class UploadImage
  */
-@WebServlet("/upload_image")
+@WebServlet("/upload_video")
 @MultipartConfig
-public class UploadImage extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public UploadImage() {
+public class UploadVideo extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+/**
+ * @see HttpServlet#HttpServlet()
+ */
+	public UploadVideo() {
 		super();
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+ *      response)
+ */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class UploadImage extends HttpServlet {
 		Map<Object, Object> responseData = null;
 		try {
 			
-			responseData = Image.upload(request, fileRoute); 	// Use default
+			responseData = Video.upload(request, fileRoute); 	// Use default
 																// image
 																// validation.
 			
@@ -62,6 +62,7 @@ public class UploadImage extends HttpServlet {
 			response.getWriter().write(jsonResponseData);
 		
 			if (writer != null) {
+				System.out.println("writer is diff from null");
                 writer.close();
             }
 			

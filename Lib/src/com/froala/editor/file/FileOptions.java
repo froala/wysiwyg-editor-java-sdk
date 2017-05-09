@@ -1,7 +1,7 @@
 package com.froala.editor.file;
 
 /**
- * File Options used for uploading.
+ * Video Options used for uploading.
  *
  * @author florin@froala.com
  */
@@ -13,19 +13,19 @@ public class FileOptions {
 	public static final String fieldnameDefault = "file";
 
 	/**
-	 * Tag name that points to the file.
+	 * Tag name that points to the File.
 	 */
 	private String fieldname;
 
 	/**
-	 * Get tag name that points to the file.
+	 * Get tag name that points to the File.
 	 */
 	public String getFieldname() {
 		return fieldname;
 	}
 
 	/**
-	 * Set tag name that points to the file.
+	 * Set tag name that points to the File.
 	 */
 	public void setFieldname(String fieldname) {
 		this.fieldname = fieldname;
@@ -37,35 +37,35 @@ public class FileOptions {
 	private FileValidation validation;
 
 	/**
-	 * Get file validation.
+	 * Get File validation.
 	 */
 	public FileValidation getValidation() {
 		return validation;
 	}
 
 	/**
-	 * Set file validation.
+	 * Set File validation.
 	 */
 	public void setValidation(FileValidation validation) {
 		this.validation = validation;
 	}
 
 	/**
-	 * Init default file upload settings.
+	 * Init default File upload settings.
 	 */
 	protected void initDefault() {
 		setValidation(new FileValidation());
 	}
 
 	/**
-	 * Constructor. Uses default options: - fieldname "file" - validation
+	 * Constructor. Uses default options: - fieldname "File" - validation
 	 * default FileValidation. To change them, use getters and setters.
 	 */
 	public FileOptions() {
-
+		
 		// Set default fieldname.
 		setFieldname(fieldnameDefault);
-
+		
 		// Init default settings.
 		initDefault();
 	}
