@@ -1,7 +1,7 @@
 package com.froala.editor.file;
 
 /**
- * Video Options used for uploading.
+ * File Options used for uploading.
  *
  * @author florin@froala.com
  */

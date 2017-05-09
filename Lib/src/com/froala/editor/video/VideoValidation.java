@@ -42,8 +42,8 @@ public class VideoValidation {
 
 	/**
 	 * Constructor. Validates default Videos with: - allowed Video extensions:
-	 * "txt", "pdf", "doc" - allowed mime types: "text/plain",
-	 * "application/msword", "application/x-pdf", "application/pdf"
+	 * "mp4", "webm", "ogg" - allowed mime types: "text/plain",
+	 * "video/mp4", "video/webm", "video/ogg"
 	 */
 	public VideoValidation() {
 

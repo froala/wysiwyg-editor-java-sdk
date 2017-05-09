@@ -13,7 +13,6 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.froala.editor.video.VideoOptions;
 
-
 public class Video {
 
 	/**
@@ -60,12 +59,11 @@ public class Video {
 	 * @param options
 	 *            Video options. Defaults to {@link #defaultOptions} which has
 	 *            </br>
-	 *            Fieldname: "Video" </br>
+	 *            Fieldname: "File" </br>
 	 *            Validation:
 	 *            <ul>
-	 *            <li>Extensions: "txt", "pdf", "doc"</li>
-	 *            <li>Mime Types: "text/plain", "application/msword",
-	 *            "application/x-pdf", "application/pdf"</li>
+	 *            <li>Extensions: "mp4", "webm", "ogg"</li>
+	 *            <li>Mime Types: "video/mp4", "video/webm", "video/ogg"</li>
 	 *            </ul>
 	 * @return Object with link.
 	 * @throws Exception
