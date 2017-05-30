@@ -42,7 +42,7 @@ public final class Image {
 	 * @throws Exception
 	 */
 	public static Map<Object, Object> upload(HttpServletRequest req, String fileRoute) throws Exception {
-
+		
 		return upload(req, fileRoute, defaultOptions);
 	}
 

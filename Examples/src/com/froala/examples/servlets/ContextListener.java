@@ -30,7 +30,5 @@ public class ContextListener implements ServletContextListener {
 		if (!path.exists()) {
 			path.mkdirs();
 		}
-
-		System.out.println("Public folder is located here: " + publicFolderPath);
 	}
 }

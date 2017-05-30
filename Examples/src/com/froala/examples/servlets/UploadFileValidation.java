@@ -41,7 +41,7 @@ public class UploadFileValidation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String fileRoute = "/public/";
+		String fileRoute = "/PATH TO/YOUR PROJECT/WORKSPACE/WEBCONTENT/WEB-INF/SOME FOLDER/"; 
 
 		FileOptions options = new FileOptions();
 		options.setFieldname("myFile");

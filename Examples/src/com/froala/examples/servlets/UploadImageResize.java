@@ -38,7 +38,7 @@ public class UploadImageResize extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String fileRoute = "/public/";
+		String fileRoute = "/PATH TO/YOUR PROJECT/WORKSPACE/WEBCONTENT/WEB-INF/SOME FOLDER/";
 
 		// Use default validation with image resize;
 		ImageOptions options = new ImageOptions();
