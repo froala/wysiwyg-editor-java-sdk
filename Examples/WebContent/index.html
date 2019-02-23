@@ -79,6 +79,10 @@
         fileUploadParams: {
           id: 'my_editor'
         },
+        videoUploadURL: '/upload_video',
+        videoUploadParams: {
+          id: 'my_editor'
+        },
         imageManagerLoadURL: '/load_images',
         imageManagerDeleteURL: "/delete_image",
         imageManagerDeleteMethod: "POST"
@@ -119,6 +123,25 @@
         })
         .fail (function (err) {
           console.log ('file delete problem: ' + JSON.stringify(err));
+        })
+      })
+      // Catch video removal from the editor.
+      .on('froalaEditor.video.removed', function (e, editor, $vid) {
+        $.ajax({
+          // Request method.
+          method: "POST",
+          // Request URL.
+          url: "/delete_video",
+          // Request params.
+          data: {
+            src: $vid.attr('src')
+          }
+        })
+        .done (function (data) {
+          console.log ('video was deleted');
+        })
+        .fail (function (err) {
+          console.log ('video delete problem: ' + JSON.stringify(err));
         })
       })
     });
@@ -264,7 +287,8 @@
       .done(function( data ) {
         $('#edit-amazon').froalaEditor({
           imageUploadToS3: data,
-          fileUploadToS3: data
+          fileUploadToS3: data,
+          videoUploadToS3: data
         })
       });
     });
