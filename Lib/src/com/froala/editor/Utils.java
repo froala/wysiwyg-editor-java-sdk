@@ -63,4 +63,17 @@ public final class Utils {
 	public static String hmac_hex(byte[] key, String data) throws Exception {
 		return new String(Hex.encodeHex(hmac(key, data)));
 	}
+	
+	public static String join(String delimiter, String[] elements) {
+	    String res = "";
+	    
+	    for(int i = 0; i < elements.length; i++) {
+	        if(i > 0) {
+	            res += delimiter;
+	        }
+	        res += elements[i];
+	    }
+	    
+	    return res;
+	}
 }
