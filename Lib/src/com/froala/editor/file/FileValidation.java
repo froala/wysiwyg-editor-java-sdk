@@ -106,7 +106,7 @@ public class FileValidation {
 			return customValidation.validate(filePath, mimeType);
 		}
 
-		return ArrayUtils.contains(allowedExts, FilenameUtils.getExtension(filePath))
+		return ArrayUtils.contains(allowedExts, FilenameUtils.getExtension(filePath).toLowerCase())
 				&& ArrayUtils.contains(allowedMimeTypes, mimeType.toLowerCase());
 	}
 }

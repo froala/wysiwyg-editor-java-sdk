@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.froala.editor.Image;
+import com.froala.editor.Video;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class UploadImage
+ * Servlet implementation class UploadVideo
  */
-@WebServlet("/upload_image")
+@WebServlet("/upload_video")
 @MultipartConfig
-public class UploadImage extends HttpServlet {
+public class UploadVideo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UploadImage() {
+	public UploadVideo() {
 		super();
 	}
 
@@ -41,17 +41,17 @@ public class UploadImage extends HttpServlet {
 
 		Map<Object, Object> responseData;
 		try {
-			responseData = Image.upload(request, fileRoute); // Use default
-																// image
+			responseData = Video.upload(request, fileRoute); // Use default
+																// video
 																// validation.
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseData = new HashMap<Object, Object>();
 			responseData.put("error", e.toString());
 		}
-		// Wait for 5 secs for image upload
-		synchronized (responseData) {
-		    try
+		// Wait for 5 secs for video upload
+        synchronized (responseData) {
+            try
             {
                 responseData.wait(5000);
                 String jsonResponseData = new Gson().toJson(responseData);
@@ -64,7 +64,7 @@ public class UploadImage extends HttpServlet {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-		}
+        }
 	}
 
 }
