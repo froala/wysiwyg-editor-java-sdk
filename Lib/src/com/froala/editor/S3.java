@@ -56,7 +56,7 @@ public final class S3 {
 
 		String dateString = dt.format(now);
 
-		String credential = String.join("/", new String[] { accessKey, dateString, region, "s3/aws4_request" });
+		String credential = Utils.join("/", new String[] { accessKey, dateString, region, "s3/aws4_request" });
 		String xAmzDate = dateString + "T000000Z";
 
 		SimpleDateFormat isoDt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.000'Z'");
