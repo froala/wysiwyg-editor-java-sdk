@@ -49,11 +49,11 @@ public class UploadImage extends HttpServlet {
 			responseData = new HashMap<Object, Object>();
 			responseData.put("error", e.toString());
 		}
-		// Wait for 5 secs for image upload
+		// Wait for 10 secs for image upload
 		synchronized (responseData) {
 		    try
             {
-                responseData.wait(5000);
+                responseData.wait(10000);
                 String jsonResponseData = new Gson().toJson(responseData);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
