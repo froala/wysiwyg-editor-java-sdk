@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/emoticons.css">
   <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/file.css">
   <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/fullscreen.css">
+  <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/files_manager.css">
   <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/image_manager.css">
   <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/image.css">
   <link rel="stylesheet" href="/bower_components/froala-wysiwyg-editor/css/plugins/line_breaker.css">
@@ -32,6 +33,7 @@
   <!-- Include Froala Editor Plugins -->
   <script src="/bower_components/froala-wysiwyg-editor/js/plugins/align.min.js"></script>
   <script src="/bower_components/froala-wysiwyg-editor/js/plugins/char_counter.min.js"></script>
+  <script src="/bower_components/froala-wysiwyg-editor/js/plugins/files_manager.min.js"></script>
   <script src="/bower_components/froala-wysiwyg-editor/js/plugins/code_beautifier.min.js"></script>
   <script src="/bower_components/froala-wysiwyg-editor/js/plugins/code_view.min.js"></script>
   <script src="/bower_components/froala-wysiwyg-editor/js/plugins/colors.min.js"></script>
@@ -70,6 +72,7 @@
   <script>
     (function() {
       new FroalaEditor('#edit',{
+        filesManagerUploadURL: './upload_files',
         imageUploadURL: './upload_image',
         imageUploadParams: {
           id: 'my_editor'
@@ -157,7 +160,8 @@
   <script>
     (function() {
       new FroalaEditor('#edit-resize',{
-        imageUploadURL: '/upload_image',
+        filesManagerUploadURL: '/upload_image_resize',
+        imageUploadURL: '/upload_image_resize',
         imageUploadParams: {
           id: 'my_editor'
         },
@@ -221,6 +225,7 @@
   <script>
     (function() {
       new FroalaEditor('#edit-validation',{
+        filesManagerUploadURL: '/upload_files_validation',
         imageUploadURL: '/upload_image_validation',
         imageUploadParams: {
           id: 'my_editor'
@@ -291,6 +296,7 @@
       $.get( "amazon_hash", {})
       .done(function( data ) {
         new FroalaEditor('#edit-amazon',{
+          filesManagerUploadToS3: data,
           imageUploadToS3: data,
           fileUploadToS3: data,
           videoUploadToS3: data
