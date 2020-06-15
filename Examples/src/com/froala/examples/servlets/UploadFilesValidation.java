@@ -78,7 +78,7 @@ public class UploadFilesValidation extends HttpServlet {
 					}
 					return true;
 				}
-                BufferedImage image;
+				BufferedImage image;
 				try {
 					image = ImageIO.read(new java.io.File(filePath));
 				} catch (IOException e) {
