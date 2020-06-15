@@ -10,6 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.ArrayUtils;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
@@ -17,6 +22,10 @@ import com.froala.editor.CustomValidation;
 import com.froala.editor.File;
 import com.froala.editor.file.FileOptions;
 import com.froala.editor.file.FileValidation;
+import com.froala.editor.image.ImageOptions;
+import com.froala.editor.image.ImageValidation;
+import com.froala.editor.video.VideoOptions;
+import com.froala.editor.video.VideoValidation;
 import com.google.gson.Gson;
 
 /**
@@ -46,13 +55,29 @@ public class UploadFilesValidation extends HttpServlet {
 		String fileRoute = "/public/";
 
 		FileOptions options = new FileOptions();
-		options.setFieldname("myFile");
+		options.setFieldname("myFiles");
+		String fieldName = options.getFieldname();
+		if(ArrayUtils.contains(ImageValidation.allowedImageMimeTypesDefault, request.getPart(fieldName).getContentType().toLowerCase())) {
+			options = new ImageOptions();
+			options.setFieldname(fieldName);
+		}
+		if(ArrayUtils.contains(VideoValidation.allowedVideoMimeTypesDefault, request.getPart(fieldName).getContentType().toLowerCase())) {
+			options = new VideoOptions();
+			options.setFieldname(fieldName);
+		}
 		options.setValidation(new FileValidation(new CustomValidation() {
 
 			@Override
 
 			public boolean validate(String filePath, String mimeType) {
-
+				if(ArrayUtils.contains(FileValidation.allowedFileMimeTypesDefault, mimeType.toLowerCase())) {
+					java.io.File f = new java.io.File(filePath);
+					long size = f.length();
+					if (size > 10 * 1024 * 1024) {
+						return false;
+					}
+					return true;
+				}
                 BufferedImage image;
 				try {
 					image = ImageIO.read(new java.io.File(filePath));
