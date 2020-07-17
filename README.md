@@ -24,7 +24,10 @@ JRE version >= 1.5 is required.
 ## Import project
 
  * Eclipse -> Right click on your project -> Build Path -> Configure Build Path... -> Projects -> Add -> Select `Lib` project.
-
+ 
+ ##### Note
+ > Third-party plugins are not supported
+ 
 ## Documentation
 
  * [Official documentation](https://www.froala.com/wysiwyg-editor/docs/sdks/java)
