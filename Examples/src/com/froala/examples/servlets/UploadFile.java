@@ -52,9 +52,21 @@ public class UploadFile extends HttpServlet {
 			responseData = new HashMap<Object, Object>();
 			responseData.put("error", e.toString());
 		}
-		String jsonResponseData = new Gson().toJson(responseData);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(jsonResponseData);
+		// Wait for file to upload
+		synchronized (responseData) {
+			try
+			{
+				responseData.wait(10000);
+				String jsonResponseData = new Gson().toJson(responseData);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonResponseData);
+			}
+			catch ( InterruptedException e )
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
