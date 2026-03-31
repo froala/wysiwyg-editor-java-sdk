@@ -69,7 +69,7 @@ jobs:
          
      - name: Update ./Examples/bower.json
        run: |
-         jq --arg VERSION "$VERSION" '.version = $VERSION' ./Examples/bower.json > tmp.json
+         jq --arg VERSION "$VERSION" '.version = $VERSION | .dependencies["froala-editor"] = $VERSION' ./Examples/bower.json > tmp.json
          mv tmp.json ./Examples/bower.json
          
      - name: Commit changes
