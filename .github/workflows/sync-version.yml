@@ -18,7 +18,7 @@ jobs:
          token: ${{ secrets.PAT }}
          
      - name: Load version
-       run: |
+       run: | 
          VERSION="${{ github.event.client_payload.version }}"
          
          if [ -z "$VERSION" ]; then
@@ -69,14 +69,16 @@ jobs:
          
      - name: Update ./Examples/bower.json
        run: |
-         jq --arg VERSION "$VERSION" '.version = $VERSION' ./Examples/bower.json > tmp.json
+         jq --arg VERSION "$VERSION" '.dependencies["froala-wysiwyg-editor"] = $VERSION' ./Examples/bower.json > tmp.json
          mv tmp.json ./Examples/bower.json
          
      - name: Commit changes
        run: |
          git config user.name "froala-travis-bot"
          git config user.email "froala_git_travis_bot@idera.com"
+
          git add ./Examples/bower.json
+
          git commit -m "chore: update Examples/bower.json to v${VERSION}" || echo "Nothing to commit"
          git push origin "$BRANCH"
          
@@ -86,16 +88,11 @@ jobs:
           RELEASE_NOTES: ${{ github.event.client_payload.release_notes }}
        run: |
           git fetch origin master
-
           if git diff --quiet origin/master..."$BRANCH"; then
             echo "No commits between $BRANCH and master. Skipping PR creation."
             exit 0
           fi
-
-          PR_BODY=$(printf \
-            "release: yes\n\n## Release Notes (from primary repo)\n\n%s\n" \
-            "$RELEASE_NOTES")
-
+          PR_BODY=$(printf "## Release Notes (from primary repo)\n\n%s\n" "$RELEASE_NOTES")
           gh pr create \
             --base master \
             --head "$BRANCH" \
